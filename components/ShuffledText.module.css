@@ -1,0 +1,13 @@
+.shuffledText {
+  display: inline-block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.char {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+}

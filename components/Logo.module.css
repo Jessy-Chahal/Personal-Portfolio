@@ -1,0 +1,12 @@
+.logoText {
+  letter-spacing: 0.15em;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.char {
+  display: inline-block;
+  transition: all 0.1s ease;
+}

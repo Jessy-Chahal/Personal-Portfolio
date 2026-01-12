@@ -1,0 +1,23 @@
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+.char {
+  display: inline-block;
+  transition: all 0.1s ease;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}

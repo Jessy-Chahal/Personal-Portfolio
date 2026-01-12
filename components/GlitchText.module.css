@@ -1,0 +1,133 @@
+.glitchText {
+  position: relative;
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+}
+
+.glitchText .text:nth-child(1) {
+  position: relative;
+  z-index: 3;
+}
+
+.glitchText .text:nth-child(2),
+.glitchText .text:nth-child(3) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitchText.active .text:nth-child(2) {
+  color: #ffffff;
+  z-index: 2;
+  animation: glitch-1 0.8s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-2px, 0);
+}
+
+.glitchText.active .text:nth-child(3) {
+  color: #000000;
+  z-index: 1;
+  animation: glitch-2 0.8s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  transform: translate(2px, 0);
+}
+
+.glitchText.active .text:nth-child(2),
+.glitchText.active .text:nth-child(3) {
+  opacity: 0.8;
+}
+
+@keyframes glitch-1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  60% {
+    transform: translate(-2px, -2px);
+  }
+  80% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+.glitchText.active .text:nth-child(1) {
+  animation: glitch-main 0.5s infinite;
+}
+
+@keyframes glitch-main {
+  0%, 100% {
+    transform: translate(0, 0);
+    filter: brightness(1);
+  }
+  10% {
+    transform: translate(-1px, 1px);
+    filter: brightness(1.2);
+  }
+  20% {
+    transform: translate(1px, -1px);
+    filter: brightness(0.8);
+  }
+  30% {
+    transform: translate(-1px, -1px);
+    filter: brightness(1.1);
+  }
+  40% {
+    transform: translate(1px, 1px);
+    filter: brightness(0.9);
+  }
+  50% {
+    transform: translate(-1px, 1px);
+    filter: brightness(1.15);
+  }
+  60% {
+    transform: translate(1px, -1px);
+    filter: brightness(0.85);
+  }
+  70% {
+    transform: translate(-1px, -1px);
+    filter: brightness(1.05);
+  }
+  80% {
+    transform: translate(1px, 1px);
+    filter: brightness(0.95);
+  }
+  90% {
+    transform: translate(-1px, 0);
+    filter: brightness(1.1);
+  }
+}
