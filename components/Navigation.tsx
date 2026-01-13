@@ -8,6 +8,7 @@ import Logo from './Logo'
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('about')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
@@ -37,7 +38,22 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [pathname])
 
+  useEffect(() => {
+    // Prevent body scroll when mobile menu is open
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
   const scrollToSection = (sectionId: string) => {
+    // Close mobile menu when navigating
+    setIsMobileMenuOpen(false)
+    
     // If we're not on the homepage, navigate there first
     if (pathname !== '/') {
       // Mark that we're navigating client-side to skip loading screen
@@ -54,51 +70,71 @@ export default function Navigation() {
   }
 
   return (
-    <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
-      <div className={styles.navContent}>
-        <div className={styles.logo} onClick={() => {
-          if (pathname !== '/') {
-            sessionStorage.setItem('isClientSideNav', 'true')
-            router.push('/')
-          } else {
-            scrollToSection('about')
-          }
-        }}>
-          <Logo />
+    <>
+      <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
+        <div className={styles.navContent}>
+          <div className={styles.logo} onClick={() => {
+            setIsMobileMenuOpen(false)
+            if (pathname !== '/') {
+              sessionStorage.setItem('isClientSideNav', 'true')
+              router.push('/')
+            } else {
+              scrollToSection('about')
+            }
+          }}>
+            <Logo />
+          </div>
+          <button 
+            className={styles.mobileMenuButton}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span className={isMobileMenuOpen ? styles.open : ''}></span>
+            <span className={isMobileMenuOpen ? styles.open : ''}></span>
+            <span className={isMobileMenuOpen ? styles.open : ''}></span>
+          </button>
+          <div className={`${styles.navLinks} ${isMobileMenuOpen ? styles.mobileOpen : ''}`}>
+            <button
+              className={activeSection === 'about' ? styles.active : ''}
+              onClick={() => scrollToSection('about')}
+            >
+              About
+            </button>
+            <button
+              className={activeSection === 'experience' ? styles.active : ''}
+              onClick={() => scrollToSection('experience')}
+            >
+              Experience
+            </button>
+            <button
+              className={activeSection === 'projects' ? styles.active : ''}
+              onClick={() => scrollToSection('projects')}
+            >
+              Projects
+            </button>
+            <button
+              className={activeSection === 'blog' ? styles.active : ''}
+              onClick={() => scrollToSection('blog')}
+            >
+              Blog
+            </button>
+            <button
+              className={activeSection === 'contact' ? styles.active : ''}
+              onClick={() => scrollToSection('contact')}
+            >
+              Contact
+            </button>
+          </div>
         </div>
-        <div className={styles.navLinks}>
-          <button
-            className={activeSection === 'about' ? styles.active : ''}
-            onClick={() => scrollToSection('about')}
-          >
-            About
-          </button>
-          <button
-            className={activeSection === 'experience' ? styles.active : ''}
-            onClick={() => scrollToSection('experience')}
-          >
-            Experience
-          </button>
-          <button
-            className={activeSection === 'projects' ? styles.active : ''}
-            onClick={() => scrollToSection('projects')}
-          >
-            Projects
-          </button>
-          <button
-            className={activeSection === 'blog' ? styles.active : ''}
-            onClick={() => scrollToSection('blog')}
-          >
-            Blog
-          </button>
-          <button
-            className={activeSection === 'contact' ? styles.active : ''}
-            onClick={() => scrollToSection('contact')}
-          >
-            Contact
-          </button>
-        </div>
-      </div>
-    </nav>
+      </nav>
+      {isMobileMenuOpen && (
+        <div 
+          className={styles.mobileBackdrop}
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </>
   )
 }

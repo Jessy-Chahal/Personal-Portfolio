@@ -84,7 +84,7 @@ export default function Projects() {
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.sectionNumber}>03</span>
-          <ShuffledHeading text="Open Source Projects" className={styles.title} />
+          <ShuffledHeading text="Personal Projects" className={styles.title} />
         </div>
         
         <div className={styles.projectsGrid}>

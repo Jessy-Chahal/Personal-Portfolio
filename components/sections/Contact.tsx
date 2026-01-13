@@ -90,7 +90,7 @@ export default function Contact() {
                 <span className={styles.contactLabel}>Email</span>
                 <span className={styles.contactValue}>jsc48@sfu.ca</span>
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
+              <a href="https://github.com/Jessy-Chahal" target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
                 <span className={styles.contactLabel}>GitHub</span>
                 <span className={styles.contactValue}>github.com/Jessy-Chahal</span>
               </a>
